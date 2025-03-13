@@ -1,7 +1,9 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import Carrousel from "../../components/Carrousel.astro";
+import ImgChateau from "../../assets/img/chateau.webp";
 
+import { Image } from "astro:assets";
 
 const faqs = [
   {
@@ -35,11 +37,12 @@ const faqs = [
         <p class="text-center text-gray-300 mt-2">
           8 Rue Henri Mouhot, 25200 Montbéliard
         </p>
-        <img
+        <!-- <img
           src="/src/assets/img/cinema.webp"
           alt="Cinéma de Montbéliard"
           class="w-full h-64 object-cover rounded-lg mt-4 shadow-md"
-        />
+        /> -->
+        <Image src={ImgChateau} alt="Les Ciné-Échos" class="w-full h-auto" />
       </div>
 
       <div class="bg-fond-article p-6 rounded-lg shadow-lg">
