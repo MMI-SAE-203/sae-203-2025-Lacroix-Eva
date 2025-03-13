@@ -1,11 +1,78 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import ImgHero from "../assets/img/overlay.webp";
+import Button from "../components/Button.astro";
+import Card from "../components/Card_accueil.astro";
+
+const cards = [
+  {
+    title: "Dates Clés",
+    listItems: [
+      { date: "15 Janvier", description: "→ Annonce des films" },
+      { date: "20 Janvier", description: "→ Annonce des invités" },
+      { date: "1 Février", description: "→ Ouverture de la billeterie" },
+      { date: "12 et 13 Juillet", description: "→ Festival" },
+    ],
+  },
+  {
+    title: "Réservez votre place!",
+    text: "Ne manquez pas nos prochaines séances, les meilleures places vous attendent.",
+    href: "/a_propos",
+    buttonText: "Achetez vos billets",
+  },
+  {
+    title: "Programmation des Films",
+    text: "Découvrez la date de tous les films en un coup d'œil.",
+    href: "/programme_films",
+    buttonText: "Explorez",
+  },
+  {
+    title: "Programmation des activités",
+    text: "Découvrez la date de toutes les activités en un coup d'œil.",
+    href: "/programme_activites",
+    buttonText: "Explorez",
+  },
+  {
+    title: "Invités",
+    text: "Apprenez-en plus sur les personnalités qui marqueront cet événement.",
+    href: "/invites",
+    buttonText: "Voir les invités",
+  },
+  {
+    title: "Tout ce qu'il faut savoir!",
+    text: "Retrouvez toutes les informations pour profiter pleinement de votre expérience.",
+    href: "/infos_pratiques",
+    buttonText: "Y accéder",
+  },
+  {
+    title: "Nos partenaires",
+    listItems: [
+      { description: "Frank Darabont" },
+      { description: "@finbien (Instagram)" },
+      { description: "studio-jag.com" },
+      { description: "Le Colisée - Montbéliard" },
+      { description: "Traiteur Le Convivial" },
+    ],
+  },
+];
 ---
 
-<Layout>
-	<Welcome />
+<Layout nom_page="Les Ciné-Échos">
+  <Image src={ImgHero} alt="Les Ciné-Échos" class="w-full h-auto" />
+  <h2 class="mt-16 mx-4 mb-8">Présentation du festival</h2>
+  <p class="uppercase text-gris text-2xl font-Montserrat mx-4">
+    Le Festival Les Ciné-Échos est un espace unique pour découvrir les voix
+    émergentes du cinéma indépendant. Projections, ateliers, discussions et
+    expériences immersives au cœur de la ville d’Héricourt...
+  </p>
+
+  <div class="mt-4 ml-4">
+    <Button text="En savoir plus" url="/a_propos" />
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-12">
+    {cards.map((item) => <Card item={item} />)}
+  </div>
 </Layout>

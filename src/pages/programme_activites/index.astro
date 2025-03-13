@@ -1,0 +1,13 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import CardActivities from "../../components/CardActivities.astro";
+import { getAllActivitesSortedByDate } from "../../../backend/backend.mjs";
+
+const activites = await getAllActivitesSortedByDate();
+---
+
+<Layout nom_page="Programme des Activités">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8 mb-12">
+    {activites.map((item) => <CardActivities {...item} />)}
+  </div>
+</Layout>

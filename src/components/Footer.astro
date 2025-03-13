@@ -1,0 +1,61 @@
+---
+import LogoInstagram from "../assets/icons/insta.svg";
+import LogoFacebook from "../assets/icons/facebook.svg";
+import LogoTiktok from "../assets/icons/tiktok.svg";
+import LogoYoutube from "../assets/icons/ytb.svg";
+import Logo from "../assets/icons/logo.svg";
+---
+
+<footer
+  class="grid text-xs bg-linear-to-b from-[#150435] to-[#1E054E] pl-12 pt-5 pb-10 lg:grid-cols-4 lg:text-sm"
+>
+  <span><Logo /></span>
+  <div class="mt-14">
+    <h3
+      class="text-white text-xs tracking-widest font-Montserrat uppercase lg:text-base"
+    >
+      Menu
+    </h3>
+    <ul class="mt-4">
+      <li><a class="text-gris lg:text-base" href="#">Mentions légales</a></li>
+      <li><a class="text-gris lg:text-base" href="#">Archives</a></li>
+      <li><a class="text-gris lg:text-base" href="#">Contact</a></li>
+    </ul>
+  </div>
+
+  <div class="mt-14">
+    <h3
+      class="text-white text-xs tracking-widest font-Montserrat uppercase lg:text-base"
+    >
+      Contact
+    </h3>
+    <p class="mt-4 font-Montserrat text-xs text-gris lg:text-base">
+      Les Ciné-Échos, 70400 Héricourt
+    </p>
+    <a class="text-gris lg:text-base" href="mailto:contact@cine-echos.com"
+      >contact@cine-echos.com</a
+    >
+  </div>
+
+  <div class="mt-14">
+    <h3
+      class="text-white text-xs tracking-widest font-Montserrat uppercase lg:text-base"
+    >
+      Nous suivre
+    </h3>
+    <ul class="flex gap-5 mt-4">
+      <a href="https://facebook.com" aria-label="Visitez notre page facebook">
+        <LogoFacebook />
+      </a>
+      <a href="https://instagram.com" aria-label="Visitez notre page instagram">
+        <LogoInstagram />
+      </a>
+      <a href="https://tiktok.com" aria-label="Visitez notre page tiktok">
+        <LogoTiktok />
+      </a>
+      <a href="https://youtube.com" aria-label="Visitez notre page Youtube">
+        <LogoYoutube />
+      </a>
+    </ul>
+  </div>
+</footer>

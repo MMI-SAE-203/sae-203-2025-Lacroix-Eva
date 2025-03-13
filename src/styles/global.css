@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@theme {
+
+    --color-bleu-dark: #1e054e;
+    --color-cyan: #04dbc4;
+    --color-fond-de-guide-style: #ededed;
+    --color-gris: #c6c4c3;
+    --color-patterns: #04dbc433;
+    --color-rose: #cd0276;
+    --color-rose-degrade: #a40a76;
+    --color-violet: #6f1051;
+    --color-fond-article: #ffffff1a;
+
+    --font-Mulish: 'Mulish', sans-serif;
+    --font-Cinzel: 'Cinzel', serif;
+    --font-Montserrat: 'Montserrat', sans-serif;
+}
+
+@layer base {
+    body {
+        @apply bg-white text-sm font-Montserrat;
+    }
+
+    h1 {
+        @apply text-6xl font-Cinzel text-white font-bold;
+    }
+
+    h2 {
+        @apply text-4xl font-Cinzel text-white font-bold relative after:content-[''] after:block after:bg-cyan after:w-[236.365px] after:h-[1.5px] after:mt-2;
+    }
+
+    h3 {
+        @apply text-base font-Montserrat text-white uppercase;
+    }
+
+    h4 {
+        @apply text-4xl font-Cinzel text-white font-bold;
+    }
+
+    p {
+        @apply text-lg font-Montserrat text-white;
+    }
+}
+

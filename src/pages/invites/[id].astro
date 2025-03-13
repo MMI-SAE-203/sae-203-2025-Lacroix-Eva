@@ -1,0 +1,109 @@
+---
+import {
+  getInviteBisById,
+  getFilmByAnimateurId,
+  getActiviteByAnimateurId,
+} from "../../../backend/backend.mjs";
+import Layout from "../../layouts/Layout.astro";
+import ImagePB from "../../components/ImagePB.astro";
+import { formatDate } from "../../../backend/herlpers.js";
+
+const { id } = Astro.params;
+const invite = await getInviteBisById(id);
+
+if (!invite) {
+  return Astro.redirect("/invites");
+}
+
+const films = await getFilmByAnimateurId(id);
+const activites = await getActiviteByAnimateurId(id);
+---
+
+<Layout nom_page={invite.prenom + " " + invite.nom}>
+  <div
+    class="max-w-4xl mx-3 lg:mx-auto px-6 lg:px-12 py-10 bg-fond-article text-white rounded-lg shadow-lg"
+  >
+    <div
+      class="w-48 h-48 mx-auto rounded-full overflow-hidden border-4 border-cyan-400"
+    >
+      <ImagePB
+        record={invite}
+        field="photo"
+        alt={invite.nom}
+        classPicture="w-full h-full object-cover"
+        classImg="w-full h-full object-cover"
+      />
+    </div>
+
+    <h4 class="text-4xl font-bold text-center mt-6 mb-6">
+      {invite.prenom}
+      {invite.nom}
+    </h4>
+    <p class="text-lg text-cyan-300 text-center">{invite.role}</p>
+    <p class="text-gray-300 mt-2 text-center">
+      {invite.biographie || "Aucune biographie disponible."}
+    </p>
+
+    {
+      films.length > 0 && (
+        <div class="mt-10">
+          <h3 class="text-2xl font-semibold text-white text-center mb-4">
+            Films associés
+          </h3>
+          <div class="grid grid-cols-1 gap-6">
+            {films.map((film) => (
+              <a
+                href={`/programme_films/${film.id}`}
+                class="block bg-gray-800 p-4 rounded-lg shadow-md hover:bg-gray-700 transition"
+              >
+                <ImagePB
+                  record={film}
+                  field="affiche"
+                  alt={film.titre}
+                  classPicture="w-full h-48 object-cover rounded-lg"
+                  classImg="w-full h-48 object-cover"
+                />
+                <h4 class="text-lg font-bold text-white mt-3">{film.titre}</h4>
+                <p class="text-gray-400 text-sm">
+                  {film.annee_sortie} - {film.genre}
+                </p>
+              </a>
+            ))}
+          </div>
+        </div>
+      )
+    }
+
+    {
+      activites.length > 0 && (
+        <div class="mt-10">
+          <h3 class="text-2xl font-semibold text-white text-center mb-4">
+            Activités associées
+          </h3>
+          <div class="gap-6">
+            {activites.map((activite) => (
+              <a
+                href={`/programme_activites/${activite.id}`}
+                class="block bg-black/20 p-4 rounded-lg shadow-md hover:bg-black/30 transition"
+              >
+                <h4 class="text-lg font-bold text-white">{activite.titre}</h4>
+                <p class="text-gray-400 text-sm">
+                  {formatDate(activite.date)} - {activite.lieu}
+                </p>
+              </a>
+            ))}
+          </div>
+        </div>
+      )
+    }
+
+    <div class="text-center mt-10">
+      <a
+        href="/invites"
+        class="inline-block px-6 py-3 bg-cyan-400 text-black font-semibold text-base rounded-lg shadow-md transition"
+      >
+        Retour aux invités
+      </a>
+    </div>
+  </div>
+</Layout>

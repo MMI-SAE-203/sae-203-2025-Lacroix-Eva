@@ -1,0 +1,36 @@
+---
+const { item } = Astro.props;
+---
+
+<div
+  class="flex flex-col items-start gap-2 p-8 mt-12 mx-4 bg-fond-article rounded-2xl"
+>
+  <h4>{item.title}</h4>
+
+  {
+    item.listItems ? (
+      <ul class="dates list-disc pl-8 space-y-2 mt-4">
+        {item.listItems.map((listItem) => (
+          <li class="dates__item ">
+            <p class="dates__text text-gris">
+              <strong>{listItem.date}</strong> {listItem.description}
+            </p>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class="my-4 text-gris">{item.text}</p>
+    )
+  }
+
+  {
+    item.href && (
+      <a
+        href={item.href}
+        class="inline-flex items-center justify-center px-8 py-3 mt-3 rounded-full bg-rose text-white text-base font-Mulish font-bold uppercase shadow-md hover:bg-rose-degrade transition"
+      >
+        {item.buttonText}
+      </a>
+    )
+  }
+</div>

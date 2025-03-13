@@ -1,0 +1,23 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import MovieCard from "../../../components/CardMovie.astro";
+import { getOffresByGenre } from "../../../../backend/backend.mjs";
+
+const { genre } = Astro.params;
+
+const films = await getOffresByGenre(genre);
+---
+
+<Layout nom_page={`Films - ${genre}`}>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8 mb-12">
+    {
+      films.length > 0 ? (
+        films.map((item) => <MovieCard {...item} />)
+      ) : (
+        <p class="text-white text-center col-span-2">
+          Aucun film trouvé pour ce genre.
+        </p>
+      )
+    }
+  </div>
+</Layout>
