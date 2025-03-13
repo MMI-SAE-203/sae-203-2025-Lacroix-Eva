@@ -1,21 +1,294 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import Carrousel from "../../components/Carrousel.astro";
 
-import Carousel from "../../components/Carrousel.astro";
 
-const tickets = [
-  { title: "Billet Film", price: "8€" },
-  { title: "Billet Activité", price: "6€" },
-  { title: "Abonnement Journée", price: "14€" },
-  { title: "Réduction Enfant", price: "4€" },
+const faqs = [
+  {
+    question: "Peut-on acheter des billets sur place ?",
+    answer:
+      "Oui, les billets sont disponibles à l’entrée des lieux, dans la limite des places disponibles.",
+  },
+  {
+    question: "Y a-t-il des tarifs réduits ?",
+    answer: "Oui, des réductions sont appliquées pour les enfants.",
+  },
+  {
+    question:
+      "Les projections en plein air sont-elles annulées en cas de pluie ?",
+    answer:
+      "Non, des installations couvertes seront mises en place si nécessaire.",
+  },
 ];
 ---
 
 <Layout nom_page="Infos Pratiques">
+  <h2 class="mx-3">Tarifs</h2>
+  <Carrousel />
+  <h2 class="mx-3 mt-10">Lieux</h2>
+  <section class="mx-auto p-3 text-gris mb-3">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="bg-fond-article p-6 rounded-lg shadow-lg">
+        <h3 class="text-2xl font-semibold text-cyan-400 text-center">
+          Cinéma de Montbéliard
+        </h3>
+        <p class="text-center text-gray-300 mt-2">
+          8 Rue Henri Mouhot, 25200 Montbéliard
+        </p>
+        <img
+          src="/src/assets/img/cinema.webp"
+          alt="Cinéma de Montbéliard"
+          class="w-full h-64 object-cover rounded-lg mt-4 shadow-md"
+        />
+      </div>
 
-  <h2 class="text-4xl font-bold text-white mt-8 mb-12">
-    Prix des Billets
-  </h2>
+      <div class="bg-fond-article p-6 rounded-lg shadow-lg">
+        <h3 class="text-2xl font-semibold text-cyan-400 text-center">
+          Château d'Héricourt
+        </h3>
+        <p class="text-center text-gray-300 mt-2">
+          19 Rue de l'Église, 70400 Héricourt
+        </p>
+        <img
+          src="/src/assets/img/chateau.webp"
+          alt="Le Château d'Héricourt"
+          class="w-full h-64 object-cover rounded-lg mt-4 shadow-md"
+        />
+      </div>
 
-  <Carousel items={tickets} />
+      <div class="bg-fond-article p-6 rounded-lg shadow-lg">
+        <h3 class="text-2xl font-semibold text-cyan-400 text-center">
+          Forêt d'Héricourt
+        </h3>
+        <p class="text-center text-gray-300 mt-2">
+          47.573494, 6.771561 Héricourt, 70400
+        </p>
+        <img
+          src="/src/assets/img/fôret.webp"
+          alt="La Forêt d'Héricourt"
+          class="w-full h-64 object-cover rounded-lg mt-4 shadow-md"
+        />
+      </div>
+    </div>
+  </section>
+
+  <h2 class="mx-3 mt-10">Hébergement</h2>
+  <section class="mx-auto p-3 text-gris mb-3">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div class="mt-6">
+        <p class="font-bold text-2xl text-gris">
+          Hôtels à Héricourt et ses environs
+        </p>
+        <ul class="mt-3 space-y-6">
+          <li>
+            <p class="text-xl font-bold mb-2 ml-5">🏨 Hôtel Le Ronchamp</p>
+            <ul class="ml-20 text-gray-300 list-disc text-lg">
+              <li class="mb-2">
+                <strong>Adresse :</strong> 1 Rue Neuve, 70250 Ronchamp (à 25 minutes
+                en voiture d’Héricourt).
+              </li>
+              <li class="mb-2">
+                <strong>Description :</strong> Un hôtel simple et confortable, idéal
+                pour les courts séjours.
+              </li>
+              <li class="mb-2">
+                <a
+                  href="https://en.leronchamp.com/"
+                  class="text-cyan-400 hover:underline">Voir leur site web</a
+                >
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <p class="text-xl font-bold mb-2 ml-5">
+              🏨 Hôtel Ibis Styles Montbéliard Centre Gare
+            </p>
+            <ul class="ml-20 text-gray-300 list-disc text-lg">
+              <li class="mb-2">
+                <strong>Adresse :</strong> 21 Av. des Alliés, 25200 Montbéliard (à
+                12 minutes en voiture d’Héricourt).
+              </li>
+              <li class="mb-2">
+                <strong>Description :</strong> Moderne et central, parfait pour accéder
+                facilement aux lieux du festival.
+              </li>
+              <li class="mb-2">
+                <a
+                  href="https://all.accor.com/hotel/8187/index.en.shtml"
+                  class="text-cyan-400 hover:underline">Voir leur site web</a
+                >
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <p class="text-xl font-bold mb-2 ml-5">
+              🏨 Hôtel Kyriad Belfort Gare
+            </p>
+            <ul class="ml-20 text-gray-300 list-disc text-lg">
+              <li class="mb-2">
+                <strong>Adresse :</strong> 55 Bis Fbg de Montbéliard, 90000 Belfort
+                (à 17 minutes en voiture d’Héricourt).
+              </li>
+              <li class="mb-2">
+                <strong>Description :</strong> Un établissement pratique pour un
+                séjour économique.
+              </li>
+              <li class="mb-2">
+                <a
+                  href="https://belfort.kyriad.com/fr-fr/"
+                  class="text-cyan-400 hover:underline">Voir leur site web</a
+                >
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="mt-6">
+        <p class="font-bold text-2xl text-gris">Campings à Proximité</p>
+        <ul class="mt-3 space-y-6">
+          <li>
+            <p class="text-xl font-bold mb-2 ml-5">
+              🏕 Camping Les Ballastières
+            </p>
+            <ul class="ml-20 text-gray-300 list-disc text-lg">
+              <li class="mb-2">
+                <strong>Adresse :</strong> 1 Rue du Titan, 70290 Champagney
+              </li>
+              <li class="mb-2">
+                <strong>Description :</strong> Cadre naturel paisible à proximité
+                de la Chapelle Notre-Dame-du-Haut.
+              </li>
+              <li class="mb-2">
+                <a
+                  href="https://www.campingdesballastieres.com/fr-fr/"
+                  class="text-cyan-400 hover:underline">Voir leur site web</a
+                >
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="mt-6">
+        <p class="font-bold text-2xl text-gris">Chambres d’Hôtes</p>
+        <ul class="mt-3 space-y-6">
+          <li>
+            <p class="text-xl font-bold mb-2 ml-5">
+              🏡 Maison d’Hôtes La Maison Bleue
+            </p>
+            <ul class="ml-20 text-gray-300 list-disc text-lg">
+              <li class="mb-2"><strong>Adresse :</strong> à SOUVANS - Jura</li>
+              <li class="mb-2">
+                <strong>Description :</strong> Une maison d’hôtes chaleureuse, idéale
+                pour un séjour en couple ou en famille.
+              </li>
+              <li class="mb-2">
+                <a
+                  href="https://www.gites-de-france.com/fr/bourgogne-franche-comte/jura/la-maison-bleue-39g4086"
+                  class="text-cyan-400 hover:underline">Voir leur site web</a
+                >
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <h2 class="mx-3 mt-10">Transport</h2>
+  <section class="mx-auto p-6 text-white">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div
+        class="bg-fond-article p-6 rounded-lg shadow-lg flex flex-col items-center text-center"
+      >
+        <span class="text-5xl">🚆</span>
+        <h3 class="text-2xl font-semibold text-cyan-400 mt-3">
+          Accès en train
+        </h3>
+        <ul class="list-disc text-gray-300 pl-5 space-y-2 text-lg mt-3">
+          <li>Gare d’Héricourt, à 10 minutes à pied des lieux principaux.</li>
+          <li>Lignes directes depuis Belfort et Besançon.</li>
+        </ul>
+      </div>
+
+      <div
+        class="bg-fond-article p-6 rounded-lg shadow-lg flex flex-col items-center text-center"
+      >
+        <span class="text-5xl">🚗</span>
+        <h3 class="text-2xl font-semibold text-cyan-400 mt-3">
+          Accès en voiture
+        </h3>
+        <ul class="list-disc text-gray-300 pl-5 space-y-2 text-lg mt-3">
+          <li>
+            Stationnement disponible : Parking du Centre-Ville et Parking du
+            Château.
+          </li>
+        </ul>
+      </div>
+
+      <div
+        class="bg-fond-article p-6 rounded-lg shadow-lg flex flex-col items-center text-center"
+      >
+        <span class="text-5xl">🤝</span>
+        <h3 class="text-2xl font-semibold text-cyan-400 mt-3">Covoiturage</h3>
+        <ul class="list-disc text-gray-300 pl-5 space-y-2 text-lg mt-3">
+          <li>Partagez votre trajet via notre partenariat avec BlaBlaCar.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <h2 class="mx-3 mt-10">FAQ</h2>
+  <section class="mx-auto py-6 px-3 text-white">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      {
+        faqs.map((faq, index) => (
+          <div class="bg-fond-article p-6 rounded-xl shadow-lg transition-all duration-300">
+            <button
+              class="flex justify-between items-center w-full text-left text-lg font-semibold text-white faq-toggle"
+              data-index={index}
+            >
+              {faq.question}
+              <span
+                id={`arrow-${index}`}
+                class="transition-transform duration-300"
+              >
+                ⬇
+              </span>
+            </button>
+
+            <div
+              id={`faq-${index}`}
+              class="max-h-0 overflow-hidden transition-all duration-500 opacity-0"
+            >
+              <p class="text-gray-300 mt-2">{faq.answer}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.querySelectorAll(".faq-toggle").forEach((button) => {
+        button.addEventListener("click", function () {
+          const index = this.getAttribute("data-index");
+          const content = document.getElementById(`faq-${index}`);
+          const arrow = document.getElementById(`arrow-${index}`);
+
+          if (content.classList.contains("max-h-0")) {
+            content.classList.remove("max-h-0", "opacity-0");
+            content.classList.add("max-h-40", "opacity-100");
+            arrow.classList.add("rotate-180");
+          } else {
+            content.classList.add("max-h-0", "opacity-0");
+            content.classList.remove("max-h-40", "opacity-100");
+            arrow.classList.remove("rotate-180");
+          }
+        });
+      });
+    });
+  </script>
 </Layout>
