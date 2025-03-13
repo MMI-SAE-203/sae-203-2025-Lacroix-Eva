@@ -1,0 +1,86 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { addNewInvite } from "../../../backend/backend.mjs";
+
+let message = "";
+if (Astro.request.method === "POST") {
+  const formData = await Astro.request.formData();
+  const response = await addNewInvite(formData);
+  console.log(response);
+
+  message = response.message;
+}
+Astro.redirect("/invites");
+---
+
+<Layout nom_page="Ajouter un invité">
+  <p class="text-green-400 font-bold my-5 text-center">{message}</p>
+
+  <form
+    action=""
+    method="POST"
+    enctype="multipart/form-data"
+    class="flex flex-col w-full max-w-2xl mx-auto px-4 my-6 bg-fond-article p-6 rounded-lg shadow-lg"
+  >
+    <input
+      type="text"
+      name="nom"
+      placeholder="Nom"
+      required
+      class="mt-2 p-3 border border-cyan-400 rounded-md bg-white text-gray-900"
+    />
+
+    <input
+      type="text"
+      name="prenom"
+      placeholder="Prenom"
+      required
+      class="mt-2 p-3 border border-cyan-400 rounded-md bg-white text-gray-900"
+    />
+
+    <select
+      name="role"
+      required
+      class="mt-2 p-3 pl-2 border border-cyan-400 rounded-md bg-white text-gray-400"
+    >
+      <option value="" disabled selected>Choisir un type</option>
+      <option value="Animateur">Animateur</option>
+      <option value="Acteur">Acteur</option>
+      <option value="Réalisateur">Réalisateur</option>
+    </select>
+
+    <input
+      type="email"
+      name="email"
+      placeholder="Email"
+      required
+      class="mt-2 p-3 border border-cyan-400 rounded-md bg-white text-gray-900"
+    />
+
+    <input
+      type="text"
+      name="biographie"
+      placeholder="Biographie"
+      required
+      class="mt-2 p-3 border border-cyan-400 rounded-md bg-white text-gray-900"
+    />
+
+    <div
+      class="mt-2 p-3 border border-cyan-400 rounded-md bg-white text-gray-300"
+    >
+      <label class="block text-gray-400 mb-1">Photo :</label>
+      <input
+        type="file"
+        name="photo"
+        class="w-full bg-gray-100 p-2 rounded-md"
+      />
+    </div>
+
+    <button
+      type="submit"
+      class="bg-rose text-white font-bold py-3 px-4 rounded-lg hover:bg-rose-degrade transition uppercase mt-5"
+    >
+      Ajouter
+    </button>
+  </form>
+</Layout>

@@ -1,0 +1,137 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import LogoFacebook from "../../assets/icons/facebook.svg";
+import LogoInstagram from "../../assets/icons/insta.svg";
+import LogoTiktok from "../../assets/icons/tiktok.svg";
+import LogoYoutube from "../../assets/icons/ytb.svg";
+
+---
+
+<Layout nom_page="Contact">
+  <h2>Formulaire de contact</h2>
+
+  <div class="max-w-2xl bg-fond-article p-6 rounded-lg shadow-lg mx-3 my-6">
+    <form id="contact-form" class="flex flex-col space-y-4">
+      <span class="text-white font-semibold after:text-red after:content-['*']"
+        >Nom</span
+      >
+      <input
+        type="text"
+        name="nom"
+        placeholder="Votre nom"
+        required
+        class="p-3 border border-cyan-400 rounded-md bg-gray-800 text-white"
+      />
+
+      <span class="text-white font-semibold after:text-red after:content-['*']"
+        >Email</span
+      >
+      <input
+        type="email"
+        name="email"
+        placeholder="Votre email"
+        required
+        class="p-3 border border-cyan-400 rounded-md bg-gray-800 text-white"
+      />
+
+      <span class="text-white font-semibold after:text-red after:content-['*']"
+        >Sujet</span
+      >
+      <input
+        type="text"
+        name="sujet"
+        placeholder="Sujet de votre message"
+        required
+        class="p-3 border border-cyan-400 rounded-md bg-gray-800 text-white"
+      />
+
+      <span class="text-white font-semibold after:text-red after:content-['*']"
+        >Message</span
+      >
+      <textarea
+        name="message"
+        placeholder="Écrivez votre message ici..."
+        required
+        class="p-3 border border-cyan-400 rounded-md bg-gray-800 text-white h-32 resize-none"
+      ></textarea>
+
+      <button
+        type="submit"
+        class="inline-flex items-center justify-center px-8 py-3 mt-3 rounded-full bg-rose text-white text-base font-Mulish font-bold uppercase shadow-md hover:bg-rose-degrade transition"
+      >
+        Envoyer
+      </button>
+    </form>
+
+    <p
+      id="confirmation-message"
+      class="text-green-400 text-center mt-4 opacity-0 transition-opacity duration-500"
+    >
+      Votre message a bien été envoyé !
+    </p>
+  </div>
+  <h2>Coordonés</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mx-3 my-6 text-gris">
+    <div class="flex flex-col items-start">
+      <p class="text-lg font-semibold text-gris">Adresse mail</p>
+      <a
+        class="text-cyan-400 hover:underline text-base"
+        href="mailto:contact@cine-echos.com"
+      >
+        contact@cine-echos.com
+      </a>
+    </div>
+
+    <div class="flex flex-col items-start">
+      <p class="text-lg font-semibold text-gris">Numéro de téléphone</p>
+      <a
+        class="text-cyan-400 hover:underline text-base"
+        href="tel:+330673778686"
+      >
+        06 73 77 86 86
+      </a>
+    </div>
+
+    <div class="flex flex-col items-start">
+      <p class="text-lg font-semibold text-gris">Adresse Postale</p>
+      <p class="text-gris text-base">Les Ciné-Échos, 70400 Héricourt</p>
+    </div>
+  </div>
+  <h2>Nos réseaux</h2>
+  <ul class="flex gap-5 my-6 mx-3">
+    <a href="https://facebook.com" aria-label="Visitez notre page facebook">
+      <LogoFacebook />
+    </a>
+    <a href="https://instagram.com" aria-label="Visitez notre page instagram">
+      <LogoInstagram />
+    </a>
+    <a href="https://tiktok.com" aria-label="Visitez notre page tiktok">
+      <LogoTiktok />
+    </a>
+    <a href="https://youtube.com" aria-label="Visitez notre page Youtube">
+      <LogoYoutube />
+    </a>
+  </ul>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document
+        .getElementById("contact-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault(); // Empêche l'envoi réel du formulaire
+          const confirmationMessage = document.getElementById(
+            "confirmation-message"
+          );
+          confirmationMessage.classList.remove("opacity-0");
+          confirmationMessage.classList.add("opacity-100");
+
+          // Réinitialiser le formulaire après 2s
+          setTimeout(() => {
+            confirmationMessage.classList.remove("opacity-100");
+            confirmationMessage.classList.add("opacity-0");
+            e.target.reset();
+          }, 3000);
+        });
+    });
+  </script>
+</Layout>

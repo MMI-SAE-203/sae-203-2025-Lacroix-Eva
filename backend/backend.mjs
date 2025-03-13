@@ -41,7 +41,7 @@ export async function getAllInvitesSortedByNom() {
 // 4) Retourne les infos d'un film en donnant son id en paramètre
 
 export async function getFilmById(id) {
-    const records = await pb.collection('Film').getOne(id);
+    const records = await pb.collection('Film').getOne(id, {expand: 'invite'});
     return records;
 }
 
@@ -49,7 +49,7 @@ export async function getFilmById(id) {
 // 5) Retourne les infos d'une activité en donnant son id en paramètre
 
 export async function getActivitesById(id) {
-    const records = await pb.collection('Activite').getOne(id);
+    const records = await pb.collection('Activite').getOne(id, {expand: 'invite'});
     return records;
 }
 
@@ -100,16 +100,57 @@ export async function getActiviteByAnimateurName(nom) {
 
 // 9) Permet d’ajouter ou modifier les informations d’un film, activité ou invité
 
+
 export async function addNewFilm(newFilm) {
-    await pb.collection('Film').create(newFilm);
+    try {
+        await pb.collection('Film').create(newFilm);
+        return {
+            success: true,
+            message: 'Film ajoutée avec succès'
+        };
+    } catch (error) {
+        console.log('Une erreur est survenue en ajoutant le film', error);
+        return {
+            success: false,
+            message: 'Une erreur est survenue en ajoutant le film'
+        };
+    }
 }
 
 export async function addNewActivite(newActivite) {
-    await pb.collection('Activite').create(newActivite);
+    try {
+        console.log(newActivite);
+        
+        await pb.collection('Activite').create(newActivite);
+        return {
+            success: true,
+            message: 'Activité ajoutée avec succès'
+        };
+    } catch (error) {
+        console.log("Une erreur est survenue en ajoutant l'activité", error);
+        return {
+            success: false,
+            message: "Une erreur est survenue en ajoutant l'activité"
+        };
+    }
 }
 
 export async function addNewInvite(newInvite) {
-    await pb.collection('Invite').create(newInvite);
+    try {
+        console.log(newInvite);
+        
+        await pb.collection('Invite').create(newInvite);
+        return {
+            success: true,
+            message: 'Invité ajoutée avec succès'
+        };
+    } catch (error) {
+        console.log("Une erreur est survenue en ajoutant l'invité", error);
+        return {
+            success: false,
+            message: "Une erreur est survenue en ajoutant l'invité"
+        };
+    }
 }
 
 export async function updateFilmById(id, newFilm) {

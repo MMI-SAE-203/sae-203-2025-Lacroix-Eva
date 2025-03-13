@@ -7,13 +7,13 @@
 // import { getActiviteByAnimateurId } from './backend.mjs';
 // import { getActiviteByAnimateurName } from './backend.mjs';
 // import { addNewFilm } from './backend.mjs';
-// import { addNewActivite } from './backend.mjs';
+import { addNewActivite } from './backend.mjs';
 // import { addNewInvite } from './backend.mjs';
 // import { updateFilmById } from './backend.mjs';
 // import { updateActiviteById } from './backend.mjs';
 // import { updateInviteById } from './backend.mjs';
 // import { getInviteBisById } from './backend.mjs';
-import { getFilmByAnimateurId } from './backend.mjs';
+// import { getFilmByAnimateurId } from './backend.mjs';
 
 // try {
 //     const records = await getAllMoviesSortedByDate() ;
@@ -86,15 +86,15 @@ import { getFilmByAnimateurId } from './backend.mjs';
 //     console.error(e);
 // }
 
-// try {
-//     const newActivite = {
-//     "titre": "test ajout"
-// };
+try {
+    const newActivite = {
+    "titre": "test ajout"
+};
 
-//     await addNewActivite(newActivite);
-// }catch (e) {
-//     console.error(e);
-// }
+    await addNewActivite(newActivite);
+}catch (e) {
+    console.error(e);
+}
 
 // try {
 //     const newInvite = {

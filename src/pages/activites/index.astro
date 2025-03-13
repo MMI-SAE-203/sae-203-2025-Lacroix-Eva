@@ -1,0 +1,17 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import CardActivities from "../../components/CardActivities.astro";
+import { getAllActivitesSortedByDate } from "../../../backend/backend.mjs";
+import Button from "../../components/Button.astro";
+
+const activites = await getAllActivitesSortedByDate();
+---
+
+<Layout nom_page="Programme des Activités">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8 mb-12">
+    {activites.map((item) => <CardActivities {...item} />)}
+  </div>
+  <div class="flex justify-center mt-8 mb-10">
+    <Button text="Ajouter une activités au programme" url="/activites/add" />
+  </div>
+</Layout>

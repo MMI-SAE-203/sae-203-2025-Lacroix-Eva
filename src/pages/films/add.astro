@@ -1,0 +1,149 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import {
+  addNewFilm,
+  getAllInvitesSortedByNom,
+} from "../../../backend/backend.mjs";
+
+const invites = await getAllInvitesSortedByNom();
+let message = "";
+if (Astro.request.method === "POST") {
+  const formData = await Astro.request.formData();
+  const response = await addNewFilm(formData);
+  message = response.message;
+  Astro.redirect("/films");
+}
+---
+
+<Layout nom_page="Ajouter un film au programme">
+  <p class="text-green-400 font-bold my-5 text-center">{message}</p>
+
+  <form
+    action=""
+    method="POST"
+    enctype="multipart/form-data"
+    class="flex flex-col w-full max-w-2xl mx-auto px-4 my-6 bg-fond-article p-6 rounded-lg shadow-lg"
+  >
+    <input
+      type="text"
+      name="titre"
+      placeholder="Titre du Film"
+      required
+      class="mt-2 p-3 border border-cyan-400 rounded-md bg-white text-gray-900"
+    />
+
+    <textarea
+      name="description"
+      placeholder="Description du film"
+      required
+      class="mt-2 p-3 border border-cyan-400 rounded-md bg-white text-gray-900 h-24 resize-none"
+    ></textarea>
+
+    <input
+      type="number"
+      name="annee_sortie"
+      placeholder="Année de sortie"
+      required
+      class="mt-2 p-3 border border-cyan-400 rounded-md bg-white text-gray-900"
+    />
+
+    <input
+      type="date"
+      name="date"
+      placeholder="Date de projection"
+      required
+      class="mt-2 p-3 border border-cyan-400 rounded-md bg-white text-gray-400"
+    />
+
+    <select
+      name="genre"
+      required
+      class="mt-2 p-3 pl-2 border border-cyan-400 rounded-md bg-white text-gray-400"
+    >
+      <option value="" disabled selected>Choisir un genre</option>
+      <option value="Comédie">Comédie</option>
+      <option value="Drame">Drame</option>
+      <option value="Horreur">Horreur</option>
+    </select>
+
+    <div
+      class="mt-2 p-3 border border-cyan-400 rounded-md bg-white text-gray-300"
+    >
+      <label class="block text-gray-400 mb-1">Affiche du film :</label>
+      <input
+        type="file"
+        name="affiche"
+        class="w-full bg-gray-100 p-2 rounded-md"
+      />
+    </div>
+
+    <input
+      type="url"
+      name="bande_annonce"
+      placeholder="Lien de la bande-annonce"
+      required
+      class="mt-2 p-3 border border-cyan-400 rounded-md bg-white text-gray-900"
+    />
+
+    <textarea
+      name="synopsis"
+      placeholder="Synopsis du Film"
+      required
+      class="mt-2 p-3 border border-cyan-400 rounded-md bg-white text-gray-900 h-24 resize-none"
+    ></textarea>
+
+    <input
+      type="number"
+      name="duree"
+      placeholder="Durée (minutes)"
+      required
+      class="mt-2 p-3 border border-cyan-400 rounded-md bg-white text-gray-900"
+    />
+
+    <select
+      name="langue"
+      required
+      class="mt-2 p-3 pl-2 border border-cyan-400 rounded-md bg-white text-gray-400"
+    >
+      <option value="" disabled selected>Choisir une langue</option>
+      <option value="Français">Français</option>
+      <option value="Anglais">Anglais</option>
+    </select>
+
+    <input
+      type="text"
+      name="production"
+      placeholder="Production du film"
+      required
+      class="mt-2 p-3 border border-cyan-400 rounded-md bg-white text-gray-900"
+    />
+
+    <input
+      type="text"
+      name="acteurs"
+      placeholder="Acteurs principaux"
+      required
+      class="mt-2 p-3 border border-cyan-400 rounded-md bg-white text-gray-900"
+    />
+
+    <select
+      name="invite"
+      required
+      class="mt-2 p-3 pl-2 border border-cyan-400 rounded-md bg-white text-gray-400"
+    >
+      <option value="" disabled selected>Invité spéciale</option>
+      {
+      invites.map((invite) => {
+        return <option value={invite.id}>{invite.nom}</option>;
+      })
+      }
+    </select>
+
+    <button
+      type="submit"
+      class="bg-rose text-white font-bold py-3 px-4 rounded-lg hover:bg-rose-degrade transition uppercase mt-5"
+    >
+      Ajouter
+    </button>
+  </form>
+</Layout>

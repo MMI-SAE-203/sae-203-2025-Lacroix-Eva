@@ -1,0 +1,35 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import CardMovie from "../../components/CardMovie.astro";
+import { getAllMoviesSortedByDate } from "../../../backend/backend.mjs";
+import Button from "../../components/Button.astro";
+
+const films = await getAllMoviesSortedByDate();
+
+const genres = ["Horreur", "Comédie", "Drame"];
+---
+
+<Layout nom_page="Programme des films">
+  <div class="flex flex-wrap justify-center gap-6 mt-8">
+    {
+      genres.map((g) => (
+        <a
+          href={`/films/categories/${g}`}
+          class="relative px-6 py-3 text-lg font-semibold text-white bg-rose/90 rounded-full shadow-md 
+               transition-all duration-300 ease-in-out hover:bg-rose hover:shadow-xl hover:-translate-y-1 
+               before:absolute before:inset-0 before:bg-white/10 before:rounded-full before:opacity-0 before:transition-opacity before:duration-300
+               active:scale-95 active:before:opacity-50"
+        >
+          {g}
+        </a>
+      ))
+    }
+  </div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8 mb-12">
+  {films.map((item) => <CardMovie {...item} />)}
+</div>
+<div class="flex justify-center mt-8 mb-10">
+  <Button text="Ajouter un film au programme" url="/films/add">
+</div>
+</Layout>

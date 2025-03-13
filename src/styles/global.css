@@ -27,7 +27,7 @@
     }
 
     h2 {
-        @apply text-4xl font-Cinzel text-white font-bold relative after:content-[''] after:block after:bg-cyan-400 after:w-[236.365px] after:h-[1.5px] after:mt-2;
+        @apply mx-3 mt-10 mb-2 text-4xl font-Cinzel text-white font-bold relative after:content-[''] after:block after:bg-cyan-400 after:w-[236.365px] after:h-[1.5px] after:mt-2;
     }
 
     h3 {

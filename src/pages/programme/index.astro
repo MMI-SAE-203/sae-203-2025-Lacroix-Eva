@@ -1,0 +1,40 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import CardMovie from "../../components/CardMovie.astro";
+import CardActivities from "../../components/CardActivities.astro";
+import Button from "../../components/Button.astro";
+import {
+  getAllMoviesSortedByDate,
+  getAllActivitesSortedByDate,
+} from "../../../backend/backend.mjs";
+
+const films = await getAllMoviesSortedByDate();
+const activites = await getAllActivitesSortedByDate();
+
+const programme = [
+  ...films.map((film) => ({ ...film, type: "film" })),
+  ...activites.map((activite) => ({ ...activite, type: "activite" })),
+];
+
+programme.sort((a, b) => new Date(a.date) - new Date(b.date));
+---
+
+<Layout nom_page="Programme du Festival">
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8 mb-12">
+    {
+      programme.map((item) =>
+        item.type === "film" ? (
+          <CardMovie {...item} />
+        ) : (
+          <CardActivities {...item} />
+        )
+      )
+    }
+  </div>
+
+  <div class="flex flex-col md:flex-row justify-center gap-6 mt-8 mb-10">
+    <Button text="Ajouter un Film" url="/films/add" />
+    <Button text="Ajouter une Activité" url="/activites/add" />
+  </div>
+</Layout>

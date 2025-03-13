@@ -1,0 +1,97 @@
+---
+import { getFilmById } from "../../../backend/backend.mjs";
+import Layout from "../../layouts/Layout.astro";
+import ImagePB from "../../components/ImagePB.astro";
+import { formatDate } from "../../../backend/herlpers.js";
+
+const { id } = Astro.params;
+const film = await getFilmById(id);
+
+if (!film) {
+  return Astro.redirect("/films");
+}
+---
+
+<Layout nom_page="Information du film" titre={film.titre}>
+  <h2 class="lg:hidden mx-3 text-3xl font-bold text-white">{film.titre}</h2>
+
+  <div
+    class="relative z-10 flex flex-col lg:flex-row items-center lg:items-start max-w-full mx-auto px-3 lg:px-12 pt-6"
+  >
+    <div class="w-full lg:w-1/3">
+      <ImagePB
+        record={film}
+        field="affiche"
+        alt={film.titre}
+        classPicture="w-full h-auto object-cover rounded-lg shadow-xl"
+        classImg="w-full h-auto object-cover rounded-lg"
+      />
+    </div>
+
+    <div
+      class="w-full lg:w-2/3 bg-fond-article p-6 lg:p-10 rounded-xl shadow-lg mt-6 lg:mt-0 lg:ml-8"
+    >
+      <h2 class="hidden lg:block text-3xl font-bold text-white">
+        {film.titre}
+      </h2>
+
+      <div class="flex flex-wrap gap-4 text-white mt-2 mb-6 lg:mt-8">
+        <span class="px-4 py-2 bg-rose rounded-full text-base"
+          >{film.annee_sortie}</span
+        >
+        <span class="px-4 py-2 bg-rose rounded-full text-base"
+          >{film.genre}</span
+        >
+        <span class="px-4 py-2 bg-rose rounded-full text-base"
+          >{film.duree} min</span
+        >
+      </div>
+
+      <p class="text-lg mt-2">{film.description}</p>
+
+      <div class="mt-6 text-gris grid grid-cols-1 lg:grid-cols-2 gap-2">
+        <div class="space-y-2">
+          <p>
+            <strong class="text-white">Date :</strong>
+            {formatDate(film.date)}
+          </p>
+          <p><strong class="text-white">Langue :</strong> {film.langue}</p>
+          <p>
+            <strong class="text-white">Production :</strong>
+            {film.production}
+          </p>
+        </div>
+
+        <div class="space-y-2">
+          <p><strong class="text-white">Acteurs :</strong> {film.acteurs}</p>
+          <p><strong class="text-white">Invité :</strong> {film.expand?.invite.prenom} {film.expand?.invite.nom}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {
+    film.bande_annonce && (
+      <div class="relative z-10 max-w-5xl mx-auto mt-12 px-6 mb-12">
+        <h3 class="text-2xl font-semibold text-white mb-3 text-center">
+          Bande-annonce
+        </h3>
+        <div class="overflow-hidden rounded-xl shadow-lg border border-gray-700">
+          <iframe
+            class="w-full h-64 md:h-96"
+            src={
+              film.bande_annonce.includes("watch?v=")
+                ? film.bande_annonce.replace("watch?v=", "embed/")
+                : film.bande_annonce.replace(
+                    "youtu.be/",
+                    "www.youtube.com/embed/"
+                  )
+            }
+            frameborder="0"
+            allowfullscreen
+          />
+        </div>
+      </div>
+    )
+  }
+</Layout>

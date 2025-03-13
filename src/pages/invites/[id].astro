@@ -53,7 +53,7 @@ const activites = await getActiviteByAnimateurId(id);
           <div class="grid grid-cols-1 gap-6">
             {films.map((film) => (
               <a
-                href={`/programme_films/${film.id}`}
+                href={`/films/${film.id}`}
                 class="block bg-gray-800 p-4 rounded-lg shadow-md hover:bg-gray-700 transition"
               >
                 <ImagePB
@@ -83,7 +83,7 @@ const activites = await getActiviteByAnimateurId(id);
           <div class="gap-6">
             {activites.map((activite) => (
               <a
-                href={`/programme_activites/${activite.id}`}
+                href={`/activites/${activite.id}`}
                 class="block bg-black/20 p-4 rounded-lg shadow-md hover:bg-black/30 transition"
               >
                 <h4 class="text-lg font-bold text-white">{activite.titre}</h4>
