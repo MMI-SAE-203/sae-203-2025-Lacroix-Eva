@@ -2,6 +2,8 @@
 import Layout from "../../layouts/Layout.astro";
 import Carrousel from "../../components/Carrousel.astro";
 import ImgChateau from "../../assets/img/chateau.webp";
+import ImgForet from "../../assets/img/foret.webp";
+import ImgCine from "../../assets/img/cine.webp";
 
 import { Image } from "astro:assets";
 
@@ -37,12 +39,11 @@ const faqs = [
         <p class="text-center text-gray-300 mt-2">
           8 Rue Henri Mouhot, 25200 Montbéliard
         </p>
-        <!-- <img
-          src="/src/assets/img/cinema.webp"
-          alt="Cinéma de Montbéliard"
-          class="w-full h-64 object-cover rounded-lg mt-4 shadow-md"
-        /> -->
-        <Image src={ImgChateau} alt="Les Ciné-Échos" class="w-full h-auto" />
+        <Image
+          src={ImgCine}
+          alt="Les Ciné-Échos"
+          class="w-full h-auto object-cover rounded-lg mt-4 shadow-md"
+        />
       </div>
 
       <div class="bg-fond-article p-6 rounded-lg shadow-lg">
@@ -52,10 +53,10 @@ const faqs = [
         <p class="text-center text-gray-300 mt-2">
           19 Rue de l'Église, 70400 Héricourt
         </p>
-        <img
-          src="/src/assets/img/chateau.webp"
-          alt="Le Château d'Héricourt"
-          class="w-full h-64 object-cover rounded-lg mt-4 shadow-md"
+        <Image
+          src={ImgChateau}
+          alt="Les Ciné-Échos"
+          class="w-full h-auto object-cover rounded-lg mt-4 shadow-md"
         />
       </div>
 
@@ -66,10 +67,10 @@ const faqs = [
         <p class="text-center text-gray-300 mt-2">
           47.573494, 6.771561 Héricourt, 70400
         </p>
-        <img
-          src="/src/assets/img/fôret.webp"
-          alt="La Forêt d'Héricourt"
-          class="w-full h-64 object-cover rounded-lg mt-4 shadow-md"
+        <Image
+          src={ImgForet}
+          alt="Les Ciné-Échos"
+          class="w-full h-auto object-cover rounded-lg mt-4 shadow-md"
         />
       </div>
     </div>
