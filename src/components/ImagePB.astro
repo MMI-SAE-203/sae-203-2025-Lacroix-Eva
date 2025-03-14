@@ -17,11 +17,9 @@ const imageUrl = record?.[field]
 
 {
   imageUrl && (
-    <Picture
-      pictureAttributes={{ class: classPicture }}
+    <img
       class={classImg}
-      inferSize={true}
-      formats={["avif", "webp"]}
+      class={classPicture}
       alt={alt || "Image"}
       src={imageUrl}
     />
