@@ -9,7 +9,7 @@ const films = await getAllMoviesSortedByDate();
 const genres = ["Horreur", "Comédie", "Drame"];
 ---
 
-<Layout nom_page="Programme des films">
+<Layout nom_page="Les Films">
   <div class="flex flex-wrap justify-center gap-6 mt-8">
     {
       genres.map((g) => (
@@ -30,6 +30,6 @@ const genres = ["Horreur", "Comédie", "Drame"];
   {films.map((item) => <CardMovie {...item} />)}
 </div>
 <div class="flex justify-center mt-8 mb-10">
-  <Button text="Ajouter un film au programme" url="/films/add">
+  <Button text="Ajouter un film" url="/films/add">
 </div>
 </Layout>

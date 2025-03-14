@@ -174,7 +174,7 @@ export { pb };
 // En Plus) Filtre films par genre
 export async function getOffresByGenre(g) {
     const FilmGenre = await pb.collection('Film').getFullList({
-        filter: `genre = "${g}"`, // Ajout des guillemets pour éviter une erreur
+        filter: `genre = "${g}"`,
     });
 
     FilmGenre.forEach((film) => {
@@ -184,22 +184,12 @@ export async function getOffresByGenre(g) {
     return FilmGenre;
 }
 
-// ✅ Filtrer les films et activités par JOUR UNIQUE (sans l'heure)
-export async function getProgrammeByDay(date) {
-    const dayStart = `${date}T00:00:00Z`; // Début du jour en format ISO
-    const dayEnd = `${date}T23:59:59Z`; // Fin du jour
-
-    const films = await pb.collection('Film').getFullList({
-        filter: `date >= '${dayStart}' && date <= '${dayEnd}'`,
+// En Plus) Filtre activité par role
+export async function getInvitesByRole(role) {
+    const records = await pb.collection('Invite').getFullList({
+        filter: `role = '${role}'`,
     });
 
-    const activites = await pb.collection('Activite').getFullList({
-        filter: `date >= '${dayStart}' && date <= '${dayEnd}'`,
-    });
-
-    return [
-        ...films.map((film) => ({ ...film, type: "film" })),
-        ...activites.map((activite) => ({ ...activite, type: "activite" }))
-    ];
+    return records;
 }
 
