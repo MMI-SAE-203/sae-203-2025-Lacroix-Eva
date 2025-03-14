@@ -1,0 +1,83 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const tarifs = [
+  { type: "Billet Film", prix: "8€" },
+  { type: "Billet Activité", prix: "6€" },
+  { type: "Abonnement Journée", prix: "14€" },
+  { type: "Réduction -12 ans", prix: "4€" },
+];
+---
+
+<Layout nom_page="Billetterie (fictive)">
+  <div class="max-w-2xl bg-fond-article p-8 rounded-lg shadow-lg mb-8 mx-3">
+    <h4 class="text-3xl font-bold text-center text-white mb-6">
+      🎟️ Réservez vos billets
+    </h4>
+
+    <form id="ticket-form" class="flex flex-col space-y-4">
+      <label class="text-white font-semibold">Type de billet</label>
+      <select
+        id="ticket-select"
+        name="ticket"
+        class="p-3 border border-cyan-400 rounded-md bg-gray-800 text-white"
+      >
+        {
+          tarifs.map((ticket) => (
+            <option value={ticket.prix}>{ticket.type}</option>
+          ))
+        }
+      </select>
+
+      <p id="ticket-price" class="text-cyan-400 text-lg font-semibold">
+        Prix : {tarifs[0].prix}
+      </p>
+
+      <button
+        type="submit"
+        class="inline-flex items-center justify-center px-8 py-3 mt-3 rounded-full bg-rose text-white text-base font-Mulish font-bold uppercase shadow-md hover:bg-rose-degrade transition"
+      >
+        Acheter maintenant
+      </button>
+
+      <p
+        id="confirmation-message"
+        class="text-green-400 text-center mt-4 opacity-0 transition-opacity duration-500"
+      >
+        ✅ Votre billet a bien été réservé !
+      </p>
+    </form>
+  </div>
+
+  <!-- Script pour gérer la sélection du billet et l'affichage du message -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const ticketSelect = document.getElementById("ticket-select");
+      const ticketPrice = document.getElementById("ticket-price");
+      const form = document.getElementById("ticket-form");
+      const confirmationMessage = document.getElementById(
+        "confirmation-message"
+      );
+
+      // Mise à jour dynamique du prix selon la sélection
+      ticketSelect.addEventListener("change", function () {
+        ticketPrice.textContent = "Prix : " + ticketSelect.value;
+      });
+
+      // Empêcher la vraie soumission et afficher un message fictif
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        confirmationMessage.classList.remove("opacity-0");
+        confirmationMessage.classList.add("opacity-100");
+
+        // Réinitialisation après 3 secondes
+        setTimeout(() => {
+          confirmationMessage.classList.remove("opacity-100");
+          confirmationMessage.classList.add("opacity-0");
+          form.reset();
+          ticketPrice.textContent = "Prix : " + ticketSelect.value;
+        }, 3000);
+      });
+    });
+  </script>
+</Layout>

@@ -7,7 +7,7 @@ const tarifs = [
 ];
 ---
 
-<div class="relative max-w-lg overflow-hidden ml-3 mt-5">
+<div class="relative max-w-lg overflow-hidden mx-3 mt-5">
   <div
     id="carousel"
     class="flex space-x-6 overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar"
@@ -17,12 +17,14 @@ const tarifs = [
         <div class="min-w-full lg:min-w-[400px] snap-center flex flex-col items-center justify-center bg-fond-article p-6 rounded-lg shadow-lg relative">
           <h3 class="text-2xl font-bold text-cyan-300">{item.titre}</h3>
           <p class="text-white text-lg mt-2">{item.prix}</p>
-
-          <button
+          <button>
+            <a
+            href="/billeterie"
             class="acheter-btn mt-5 mb-0 m-3 inline-flex items-center justify-center px-8 py-3 rounded-full bg-rose text-white text-base font-Mulish font-bold uppercase shadow-md hover:bg-rose-degrade transition"
             data-index={index}
-          >
+            >
             Acheter
+            </a>
           </button>
         </div>
       ))
@@ -56,12 +58,6 @@ const tarifs = [
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-
-    document.querySelectorAll(".acheter-btn").forEach((button) => {
-      button.addEventListener("click", function () {
-        alert("La billetterie n'est pas encore ouverte !");
-      });
-    });
 
     const carousel = document.getElementById("carousel");
     const prev = document.getElementById("prev");
