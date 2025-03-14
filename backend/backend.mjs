@@ -1,5 +1,5 @@
 import PocketBase from 'pocketbase' ;
-const pb = new PocketBase('http://127.0.0.1:8090') ;
+const pb = new PocketBase('https://sae203.eva-lacroix.fr') ;
 
 // 1) Retourne la liste de tous les films triés par date de projection
 
@@ -183,3 +183,23 @@ export async function getOffresByGenre(g) {
 
     return FilmGenre;
 }
+
+// ✅ Filtrer les films et activités par JOUR UNIQUE (sans l'heure)
+export async function getProgrammeByDay(date) {
+    const dayStart = `${date}T00:00:00Z`; // Début du jour en format ISO
+    const dayEnd = `${date}T23:59:59Z`; // Fin du jour
+
+    const films = await pb.collection('Film').getFullList({
+        filter: `date >= '${dayStart}' && date <= '${dayEnd}'`,
+    });
+
+    const activites = await pb.collection('Activite').getFullList({
+        filter: `date >= '${dayStart}' && date <= '${dayEnd}'`,
+    });
+
+    return [
+        ...films.map((film) => ({ ...film, type: "film" })),
+        ...activites.map((activite) => ({ ...activite, type: "activite" }))
+    ];
+}
+
