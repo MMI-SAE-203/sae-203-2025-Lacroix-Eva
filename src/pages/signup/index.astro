@@ -1,0 +1,69 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+let message = "";
+if (Astro.request.method === "POST") {
+  const formData = await Astro.request.formData();
+  const pseudo = formData.get("pseudo");
+  const email = formData.get("email");
+  const password = formData.get("password");
+
+  if (pseudo && email && password) {
+    message = `✅ Votre compte a bien été créé, ${pseudo} !`;
+  } else {
+    message = "❌ Erreur, veuillez remplir tous les champs.";
+  }
+}
+---
+
+<Layout nom_page="Inscription">
+  <div class="max-w-2xl mx-auto bg-fond-article p-6 rounded-lg shadow-lg mb-8">
+    <h4 class="text-3xl font-bold text-center text-white mb-6">
+      📝 Inscrivez-vous
+    </h4>
+
+    <p class="text-green-400 text-center font-bold my-4">{message}</p>
+
+    <form action="/signup" method="POST" class="flex flex-col space-y-4">
+      <label class="text-white font-semibold">Pseudo</label>
+      <input
+        type="text"
+        name="pseudo"
+        placeholder="Choisissez un pseudo"
+        required
+        class="p-3 border border-cyan-400 rounded-md bg-gray-800 text-white"
+      />
+
+      <label class="text-white font-semibold">Email</label>
+      <input
+        type="email"
+        name="email"
+        placeholder="Votre email"
+        required
+        class="p-3 border border-cyan-400 rounded-md bg-gray-800 text-white"
+      />
+
+      <label class="text-white font-semibold">Mot de passe</label>
+      <input
+        type="password"
+        name="password"
+        placeholder="Créez un mot de passe"
+        required
+        class="p-3 border border-cyan-400 rounded-md bg-gray-800 text-white"
+      />
+
+      <button
+        type="submit"
+        class="inline-flex items-center justify-center px-8 py-3 mt-3 rounded-full bg-rose text-white text-base font-Mulish font-bold uppercase shadow-md hover:bg-rose-degrade transition"
+      >
+        S'inscrire
+      </button>
+    </form>
+
+    <p class="text-center text-gray-300 mt-4">
+      Déjà un compte ? <a href="/login" class="text-cyan-400 hover:underline"
+        >Connectez-vous</a
+      >
+    </p>
+  </div>
+</Layout>

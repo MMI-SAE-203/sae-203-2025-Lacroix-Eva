@@ -1,0 +1,58 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+let message = "";
+if (Astro.request.method === "POST") {
+  const formData = await Astro.request.formData();
+  const email = formData.get("email");
+  const password = formData.get("password");
+
+  if (email === "test@email.com" && password === "123456") {
+    message = "✅ Connexion réussie ! Bienvenue !";
+  } else {
+    message = "❌ Identifiants incorrects. Réessayez.";
+  }
+}
+---
+
+<Layout nom_page="Connexion">
+  <div class="max-w-2xl mx-auto bg-fond-article p-6 rounded-lg shadow-lg mb-8">
+    <h4 class="text-3xl font-bold text-center text-white mb-6">🔑 Connexion</h4>
+
+    <p class="text-green-400 text-center font-bold my-4">{message}</p>
+
+    <form action="/login" method="POST" class="flex flex-col space-y-4">
+      <label class="text-white font-semibold">Email</label>
+      <input
+        type="email"
+        name="email"
+        placeholder="Votre email"
+        required
+        class="p-3 border border-cyan-400 rounded-md bg-gray-800 text-white"
+      />
+
+      <label class="text-white font-semibold">Mot de passe</label>
+      <input
+        type="password"
+        name="password"
+        placeholder="Votre mot de passe"
+        required
+        class="p-3 border border-cyan-400 rounded-md bg-gray-800 text-white"
+      />
+
+      <button
+        type="submit"
+        class="inline-flex items-center justify-center px-8 py-3 mt-3 rounded-full bg-rose text-white text-base font-Mulish font-bold uppercase shadow-md hover:bg-rose-degrade transition"
+      >
+        Se connecter
+      </button>
+    </form>
+
+    <p class="text-center text-gray-300 mt-4">
+      Pas encore de compte ? <a
+        href="/signup"
+        class="text-cyan-400 hover:underline">Inscrivez-vous</a
+      >
+    </p>
+  </div>
+</Layout>
